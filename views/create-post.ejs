@@ -1,0 +1,27 @@
+<div class="bg">
+<%- include("partials/header.ejs") %>
+
+
+<% if (locals.isEdit) { %>
+    <p class="edit-text">Edit your Blog</p>
+    <% } else{ %>
+        <p class="form-text">Fill the form for creating your blog</p>
+        <% } %>
+<form action="<%= locals.isEdit ? `/edit/${locals.blogDetails?.id}` : '/programming-blogs' %>"
+     method="post" enctype="multipart/form-data">
+    <div class="create-post-div">
+    <h3 class="upload-img">Upload an Image</h3>
+    <input class="choose-file" type="file" id="myFile" name="filename" required>
+    <h3>Type blog title</h3>
+    <input name="title" type="text" class="title" placeholder="title" required/>
+    <h3>Type blog description</h3>
+    <textarea name="description" class="description" placeholder="Type here" rows="5" required></textarea>
+    <input class="submit-button" type="submit" value="<%= locals.isEdit ? 'EDIT' : 'PUBLISH' %>">
+</div>
+</form>
+
+
+
+<%- include("partials/footer.ejs") %>
+</div>
+

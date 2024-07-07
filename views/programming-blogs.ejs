@@ -1,0 +1,47 @@
+<%- include("partials/header.ejs") %>
+
+  <% if (!locals.blogList) { %> 
+        <h1 class="no-blog-title">
+            You don't have any blogs yet. Please visit <br />the home page to create a
+            new blog.
+        </h1> 
+        <% } else {%>
+            <h1 class="blog-title">Your Blogs list</h1>
+            <% } %> 
+    
+    
+    <%  if(locals.blogList){ %> 
+        <% for( let index=0; index < blogList.length; index++ ) { %>
+            <div class="pf-cards-div">
+        <div class="pf-card-container" >
+           
+        <img class="pf-card-img" src="uploads/<%=  blogList[index].cardImage %>" href="#">
+        <div class="pf-text-container">
+        <h2 class="pf-card-title"> <%= blogList[index].cardTitle %> </h2>
+        <h4 class="pf-card-description">
+            <%= blogList[index].cardDescription?.slice(0,300) %>
+            <% if (blogList[index].cardDescription?.length> 299) { %> ...
+                <a class="view-btn" href="/blogDetails/<%= blogList[index].id %>">
+                    View Blog</a>
+                <% } %>
+                
+        </h4>
+             <div class="btn-wrapper">
+                <form action="/delete/<%= blogList[index].id %>" method="post">
+                    <button class="delete-btn">Delete</button>
+                </form>
+                <a class="edit-btn" href="/edit/<%=  blogList[index].id %>">edit</a>
+            </div>
+
+            </div>
+      
+        </div>
+        </div>
+
+    <% } %> 
+    <% } else{ %>
+        <h1 class="no-blog">NO Blogs here</h1>
+                     <% } %>
+
+    <%- include("partials/footer.ejs") %>
+    
